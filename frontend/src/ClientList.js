@@ -6,34 +6,34 @@ import { Link } from "react-router-dom";
 class ClientList extends Component {
   constructor(props) {
     super(props);
-    this.state = { clients: [] };
+    this.state = { users: [] };
     this.remove = this.remove.bind(this);
   }
   componentDidMount() {
-    fetch("/clients")
+    fetch("/users")
       .then((response) => response.json())
-      .then((data) => this.setState({ clients: data }));
+      .then((data) => this.setState({ users: data }));
   }
   async remove(id) {
-    await fetch(`/clients/${id}`, {
+    await fetch(`/users/${id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
     }).then(() => {
-      let updatedClients = [...this.state.clients].filter((i) => i.id !== id);
-      this.setState({ clients: updatedClients });
+      let updatedUsers = [...this.state.users].filter((i) => i.id !== id);
+      this.setState({ users: updatedUsers });
     });
   }
   render() {
-    const { clients, isLoading } = this.state;
+    const { users, isLoading } = this.state;
 
     if (isLoading) {
       return <p>Loading...</p>;
     }
 
-    const clientList = clients.map((client) => {
+    const userList = users.map((client) => {
       return (
         <tr key={client.id}>
           <td style={{ whiteSpace: "nowrap" }}>{client.name}</td>
@@ -44,7 +44,7 @@ class ClientList extends Component {
                 size="sm"
                 color="primary"
                 tag={Link}
-                to={"/clients/" + client.id}
+                to={"/users/" + client.id}
               >
                 Edit
               </Button>
@@ -66,11 +66,11 @@ class ClientList extends Component {
         <AppNavbar />
         <Container fluid>
           <div className="float-right">
-            <Button color="success" tag={Link} to="/clients/new">
+            <Button color="success" tag={Link} to="/users/new">
               Add Client
             </Button>
           </div>
-          <h3>Clients</h3>
+          <h3>Users</h3>
           <Table className="mt-4">
             <thead>
               <tr>

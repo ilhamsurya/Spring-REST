@@ -11,8 +11,8 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path="/" exact={true} component={Home} />
-          <Route path="/clients" exact={true} component={ClientList} />
-          <Route path="/clients/:id" component={ClientEdit} />
+          <Route path="/users" exact={true} component={ClientList} />
+          <Route path="/users/:id" component={ClientEdit} />
         </Switch>
       </Router>
     );
@@ -20,3 +20,4 @@ class App extends Component {
 }
 
 export default App;
+

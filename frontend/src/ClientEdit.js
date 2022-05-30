@@ -19,7 +19,7 @@ class ClientEdit extends Component {
   async componentDidMount() {
     if (this.props.match.params.id !== "new") {
       const client = await (
-        await fetch(`/clients/${this.props.match.params.id}`)
+        await fetch(`/users/${this.props.match.params.id}`)
       ).json();
       this.setState({ item: client });
     }
@@ -36,7 +36,7 @@ class ClientEdit extends Component {
     event.preventDefault();
     const { item } = this.state;
 
-    await fetch("/clients" + (item.id ? "/" + item.id : ""), {
+    await fetch("/users" + (item.id ? "/" + item.id : ""), {
       method: item.id ? "PUT" : "POST",
       headers: {
         Accept: "application/json",
@@ -44,7 +44,7 @@ class ClientEdit extends Component {
       },
       body: JSON.stringify(item),
     });
-    this.props.history.push("/clients");
+    this.props.history.push("/users");
   }
   render() {
     const { item } = this.state;
@@ -82,7 +82,7 @@ class ClientEdit extends Component {
               <Button color="primary" type="submit">
                 Save
               </Button>{" "}
-              <Button color="secondary" tag={Link} to="/clients">
+              <Button color="secondary" tag={Link} to="/users">
                 Cancel
               </Button>
             </FormGroup>
